@@ -1,4 +1,6 @@
-﻿namespace StaffManager
+﻿using System.Windows.Forms;
+
+namespace StaffManager
 {
     partial class Main
     {

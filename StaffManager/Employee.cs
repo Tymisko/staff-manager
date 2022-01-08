@@ -1,4 +1,6 @@
-﻿namespace StaffManager
+﻿using System;
+
+namespace StaffManager
 { 
     internal class Employee : Person
     {
