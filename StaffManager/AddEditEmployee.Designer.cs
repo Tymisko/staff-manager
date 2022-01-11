@@ -67,6 +67,7 @@
             // 
             this.tbId.Location = new System.Drawing.Point(119, 10);
             this.tbId.Name = "tbId";
+            this.tbId.ReadOnly = true;
             this.tbId.Size = new System.Drawing.Size(248, 23);
             this.tbId.TabIndex = 3;
             // 
@@ -139,7 +140,17 @@
             // 
             // nupSalary
             // 
+            this.nupSalary.Increment = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
             this.nupSalary.Location = new System.Drawing.Point(119, 157);
+            this.nupSalary.Maximum = new decimal(new int[] {
+            50000,
+            0,
+            0,
+            0});
             this.nupSalary.Name = "nupSalary";
             this.nupSalary.Size = new System.Drawing.Size(248, 23);
             this.nupSalary.TabIndex = 11;

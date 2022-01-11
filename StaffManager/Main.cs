@@ -1,7 +1,5 @@
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Windows.Forms;
 
 namespace StaffManager
@@ -11,14 +9,23 @@ namespace StaffManager
         private readonly FileHelper<List<Employee>> _fileHelper;
         public Main()
         {
+            _fileHelper = new FileHelper<List<Employee>>(Program.StaffDiaryPath);
             InitializeComponent();
-            _fileHelper = new FileHelper<List<Employee>>(Program.StaffDiaryPath)
+            LoadStaff();
         }        
 
         private void BtnAdd_Click(object sender, EventArgs e)
         {
             var addEditEmployee = new AddEditEmployee();
             addEditEmployee.ShowDialog();
+            addEditEmployee.FormClosed += AddEditEmployee_FormClosed;
         }
+
+        private void AddEditEmployee_FormClosed(object? sender, FormClosedEventArgs e)
+        {
+            LoadStaff();
+        }
+
+        private void LoadStaff() => dgvDiary.DataSource = _fileHelper.DeserializeFromJson();
     }
 }

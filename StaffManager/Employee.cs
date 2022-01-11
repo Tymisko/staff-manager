@@ -6,7 +6,7 @@ namespace StaffManager
     {
         public Employee
             (
-                int id, 
+                string id, 
                 string firstName, 
                 string lastName, 
                 DateTime birthDate, 
@@ -19,7 +19,7 @@ namespace StaffManager
             Salary = Math.Round(salary, 2);
         }
 
-        public int Id { get; }
+        public string Id { get; }
         public DateTime EmploymentDate { get; }
         public DateTime? DismissalDate { get; }
         public string? Comments { get; }
