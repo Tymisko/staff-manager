@@ -30,7 +30,8 @@ namespace StaffManager
                 tbLastName.Text,
                 dtpBirthDate.Value.Date,
                 dtpEmploymentDate.Value.Date,
-                nupSalary.Value
+                nupSalary.Value,
+                rtbComments.Text
                 );
         }
     }

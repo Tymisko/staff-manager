@@ -17,8 +17,8 @@ namespace StaffManager
         private void BtnAdd_Click(object sender, EventArgs e)
         {
             var addEditEmployee = new AddEditEmployee();
-            addEditEmployee.ShowDialog();
             addEditEmployee.FormClosed += AddEditEmployee_FormClosed;
+            addEditEmployee.ShowDialog();
         }
 
         private void AddEditEmployee_FormClosed(object? sender, FormClosedEventArgs e)

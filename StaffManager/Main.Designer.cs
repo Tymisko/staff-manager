@@ -71,6 +71,7 @@ namespace StaffManager
             this.dgvDiary.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvDiary.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvDiary.BackgroundColor = System.Drawing.Color.WhiteSmoke;
             this.dgvDiary.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDiary.Location = new System.Drawing.Point(12, 40);
@@ -78,18 +79,19 @@ namespace StaffManager
             this.dgvDiary.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dgvDiary.RowTemplate.Height = 25;
             this.dgvDiary.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvDiary.Size = new System.Drawing.Size(949, 481);
+            this.dgvDiary.Size = new System.Drawing.Size(982, 764);
             this.dgvDiary.TabIndex = 3;
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(975, 538);
+            this.ClientSize = new System.Drawing.Size(1008, 821);
             this.Controls.Add(this.dgvDiary);
             this.Controls.Add(this.BtnEdit);
             this.Controls.Add(this.BtnDismiss);
             this.Controls.Add(this.BtnAdd);
+            this.MinimumSize = new System.Drawing.Size(1024, 860);
             this.Name = "Main";
             this.Text = "Staff Manager";
             ((System.ComponentModel.ISupportInitialize)(this.dgvDiary)).EndInit();

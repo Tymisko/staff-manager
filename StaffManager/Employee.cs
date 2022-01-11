@@ -11,12 +11,14 @@ namespace StaffManager
                 string lastName, 
                 DateTime birthDate, 
                 DateTime employmentDate, 
-                decimal salary
+                decimal salary,
+                string comments = null
             ) : base(firstName, lastName, birthDate)
         {
             Id = id;
             EmploymentDate = employmentDate;
             Salary = Math.Round(salary, 2);
+            Comments = comments;
         }
 
         public string Id { get; }
