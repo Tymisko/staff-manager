@@ -6,7 +6,7 @@ namespace StaffManager
     {
         public Employee
             (
-                string id, 
+                int id, 
                 string firstName, 
                 string lastName, 
                 DateTime birthDate, 
@@ -21,7 +21,7 @@ namespace StaffManager
             Comments = comments;
         }
 
-        public string Id { get; }
+        public int Id { get; }
         public DateTime EmploymentDate { get; }
         public DateTime? DismissalDate { get; }
         public string? Comments { get; }
