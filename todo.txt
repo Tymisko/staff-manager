@@ -1,0 +1,20 @@
+1. if (!(_dismissalDate == null)) if (!(dgvDiary.SelectedRows.Count == 0))  - nie razi Cię w oczy ten nadmiarowy nawias z negacją? Dlaczego nie zrobisz po prostu != (bądź is not w przypadku nulla)? Ewentualnie am gdzie się da to odwrócić ifa albo zrobić trójargumentowy, wszystkie opcje wyglądają lepiej niż ten nawias według mnie 😛
+2. GetSelectedEmployeeId() -> rzuca exception tylko po to, by poziom wyżej go złapać i wyświetlić MessageBoxa, nie powinieneś używać exceptionów tam, gdzie wystarczą if'y 😛
+3. Trzymanie danych w pliku wymusza u Ciebie (de)serializację w wielu miejscach, lepiej by to było trzymać w pamięci i robić zrzut przy zmianach i ewentualnie pominąć odczytywanie po zapisie (zapis wywali exceptiona jeśli się nie powiedzie, a jeśli się uda to nie będzie rozjazdu).
+var selectedEmployee = employees.FirstOrDefault(e => e.Id == id) as Employee; tbId.Text = selectedEmployee!.Id.ToString();
+Z czego wynika ten wykrzyknik? Jedna metoda deserializuje plik, wyciąga dane, przepycha dalej samo id by inna metoda znowu zdeserializowała ten sam plik i wyciągnęła wpis po id. Może gdybyś na różnych etapach wyciągał dane z różnych plików/tabel to przepychanie samego id ma sens, ale jeśli masz dane w ręku to po co sobie utrudniać?
+Jeżeli zabezpieczasz się przed modyfikacją pliku z innego źródła w trakcie działania programu to się chyba nie udało
+4. Nazwa "Main" dla okna do mnie nie przemawia (jednak nazwa kojarzy się z czym innym).
+5. public string? Comments { get; } niby oznaczyłeś jako nullable ale domyślnie ustawiasz na "" - tutaj musisz się na coś zdecydować.
+6. FileHelper też ma jakiś problem z podejmowaniem decyzji, raz korzysta ze ścieżki z publicznego statica, raz z tego co dostał w konstruktorze (co póki co jest tym samym).
+7. Osobiście nie lubię var'ów - ale tam gdzie wprost widać co jaki ma typ jeszcze je zniosę, u Ciebie są wszędzie co obniża czytelność, np tutaj var employees = _fileHelper.DeserializeFromJson(); 
+8. Była mowa o modyfikowaniu pliku z zewnątrz to i warto wspomnieć o kwestii dostępu do pliku, odczyt/zapis może się wysypać, co Twoja aplikacja zrobi wtedy? 😛
+9. _fileHelper = new FileHelper<List<Employee>>(Program.StaffDiaryPath); każda kontrolka sobie sama to powołuje, zamiast tego powinieneś to potraktować jako "serwis", stworzyć raz i przekazać wszędzie gdzie potrzebne (winformsowemu designerowi chyba nie przeszkadzało jak coś wlatuje do konstruktora), przy okazji zdejmujesz z kontrolki odpowiedzialność za operacje na pliku (bo tego raczej nie powinna robić :P).
+Wtedy możesz w łatwy sposób podmienić serwis z tego wykorzystującego lokalny plik na coś, co np. łączy się z chmurą, bez potrzeby zmieniania tego w n miejscach (pogooglaj repository pattern, dependency injection - mocne słowa jak na desktop, ale chodzi o samą ideę).
+10. No i ogólnie desktopy są passe (przeglądarka mocno ogranicza wiec dalej mają sens, więc jak już to jakieś kombajniaste apki potrzebujące mnóstwa zasobów czy jakieś serwisy działające w tle).
+11. A co do "uczenia się" winformsów - one są prymitywne jak tylko mogą, tu nie ma zbytnio czego (i po co) się uczyć.
+
+Pola z podkreśleniem powinieneś poprzedzać thisem - this._pole
+
+add to .gitignore 
+- AddEditEmployee.cs.bak

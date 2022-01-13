@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace StaffManager
@@ -14,33 +15,8 @@ namespace StaffManager
             LoadStaff();
             SetColumnsHeaders();
         }
-
-        private void BtnAdd_Click(object sender, EventArgs e)
-        {
-            var addEditEmployee = new AddEditEmployee();
-            addEditEmployee.FormClosed += AddEditEmployee_FormClosed;
-            addEditEmployee.ShowDialog();
-        }
-
-        private void AddEditEmployee_FormClosed(object? sender, FormClosedEventArgs e)
-        {
-            LoadStaff();
-        }
-
         private void LoadStaff() => dgvDiary.DataSource = _fileHelper.DeserializeFromJson();
-        private void BtnEdit_Click(object sender, EventArgs e)
-        {
-            if (dgvDiary.SelectedRows.Count == 0)
-            {
-                MessageBox.Show("Select employee to edit", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
 
-            var selectedEmployeeId = Convert.ToInt32(dgvDiary.SelectedRows[0].Cells[nameof(Employee.Id)].Value);
-            var addEditEmployee = new AddEditEmployee(selectedEmployeeId);
-            addEditEmployee.FormClosed += AddEditEmployee_FormClosed;
-            addEditEmployee.ShowDialog();
-        }
         private void SetColumnsHeaders()
         {
             dgvDiary.Columns[nameof(Employee.Id)].HeaderText = "Id";
@@ -53,5 +29,50 @@ namespace StaffManager
             dgvDiary.Columns[nameof(Employee.DismissalDate)].HeaderText = "Dismissal Date";
         }
 
+        private void BtnAdd_Click(object sender, EventArgs e)
+        {
+            var addEditEmployee = new AddEditEmployee();
+            addEditEmployee.FormClosed += AddEditEmployee_FormClosed;
+            addEditEmployee.ShowDialog();
+        }        
+
+        private void BtnEdit_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var addEditEmployee = new AddEditEmployee(GetSelectedEmployeeId());
+                addEditEmployee.FormClosed += AddEditEmployee_FormClosed;
+                addEditEmployee.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }            
+        }
+        private void BtnDismiss_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var employees = _fileHelper.DeserializeFromJson();
+                employees.First(e => e.Id == GetSelectedEmployeeId()).DismissalDate = DateTime.Now.Date;
+                _fileHelper.SerializeToJson(employees);
+                LoadStaff();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void AddEditEmployee_FormClosed(object? sender, FormClosedEventArgs e)
+        {
+            LoadStaff();
+        }
+        private int GetSelectedEmployeeId()
+        {
+            if (dgvDiary.SelectedRows.Count != 0)
+                return Convert.ToInt32(dgvDiary.SelectedRows[0].Cells[nameof(Employee.Id)].Value);
+            throw new Exception("No employee were selected.");
+        }
     }
 }

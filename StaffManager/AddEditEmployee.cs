@@ -86,7 +86,7 @@ namespace StaffManager
             var employees = _fileHelper.DeserializeFromJson();
             var lastAddedEmployee = employees.OrderByDescending(e => e.Id).FirstOrDefault();
             
-            if (lastAddedEmployee == null)
+            if (lastAddedEmployee is null)
                 return 1;
 
             return lastAddedEmployee.Id + 1;
