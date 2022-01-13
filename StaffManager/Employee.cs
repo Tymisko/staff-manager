@@ -12,7 +12,7 @@ namespace StaffManager
                 DateTime birthDate, 
                 DateTime employmentDate, 
                 decimal salary,
-                string comments = null
+                string comments = ""
             ) : base(firstName, lastName, birthDate)
         {
             Id = id;
