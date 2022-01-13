@@ -55,6 +55,7 @@ namespace StaffManager
             this.BtnDismiss.TabIndex = 1;
             this.BtnDismiss.Text = "Dismiss";
             this.BtnDismiss.UseVisualStyleBackColor = true;
+            this.BtnDismiss.Click += new System.EventHandler(this.BtnDismiss_Click);
             // 
             // BtnEdit
             // 
