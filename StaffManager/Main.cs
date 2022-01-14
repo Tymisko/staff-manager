@@ -68,6 +68,7 @@ namespace StaffManager
         {
             LoadStaff();
         }
+
         private int GetSelectedEmployeeId()
         {
             if (dgvDiary.SelectedRows.Count != 0)
