@@ -14,7 +14,7 @@ namespace StaffManager
 
         public void SerializeToJson(T data)
         {
-            File.WriteAllText(Program.StaffDiaryPath, JsonConvert.SerializeObject(data));
+            File.WriteAllText(_filePath, JsonConvert.SerializeObject(data));
         }
 
         public T DeserializeFromJson()

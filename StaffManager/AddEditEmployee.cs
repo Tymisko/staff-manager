@@ -9,11 +9,9 @@ namespace StaffManager
     {
         private readonly bool _editingEmployee;
 
-        private readonly FileHelper<List<Employee>> _fileHelper;
         public AddEditEmployee(int selectedEmployeeId = 0)
         {
             InitializeComponent();
-            _fileHelper = new FileHelper<List<Employee>>(Program.StaffDiaryPath);
 
             _editingEmployee = selectedEmployeeId != 0;
 
@@ -36,8 +34,7 @@ namespace StaffManager
 
         private void LoadEmployeeData(int id)
         {
-            var employees = _fileHelper.DeserializeFromJson();
-            var selectedEmployee = employees.FirstOrDefault(e => e.Id == id) as Employee;
+            var selectedEmployee = Main.Employees.FirstOrDefault(e => e.Id == id) as Employee;
 
             tbId.Text = selectedEmployee!.Id.ToString();
             tbFirstName.Text = selectedEmployee.FirstName;
@@ -54,14 +51,12 @@ namespace StaffManager
             {
                 CheckIfBoxesAreFilled();
 
-                var employees = _fileHelper.DeserializeFromJson();
-
                 if (_editingEmployee)
-                    employees.RemoveAll(e => e.Id == Convert.ToInt32(tbId.Text));
+                    Main.Employees.RemoveAll(e => e.Id == Convert.ToInt32(tbId.Text));
 
-                employees.Add(GetEmployeeData());
+                Main.Employees.Add(GetEmployeeData());
 
-                _fileHelper.SerializeToJson(employees);
+                Program.FileHelper.SerializeToJson(Main.Employees);
                 this.Close();
             }
             catch (Exception exception)
@@ -83,8 +78,7 @@ namespace StaffManager
 
         private int SetNewEmployeeId()
         {
-            var employees = _fileHelper.DeserializeFromJson();
-            var lastAddedEmployee = employees.OrderByDescending(e => e.Id).FirstOrDefault();
+            var lastAddedEmployee = Main.Employees.OrderByDescending(e => e.Id).FirstOrDefault();
             
             if (lastAddedEmployee is null)
                 return 1;

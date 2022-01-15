@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
 
@@ -8,9 +9,11 @@ namespace StaffManager
     {
         public static readonly string StaffDiaryPath = Path.Combine(
             Path.GetDirectoryName(Application.ExecutablePath), "staff.json");
+        
         /// <summary>
         ///  The main entry point for the application.
         /// </summary>
+        /// 
         [STAThread]
         static void Main()
         {
@@ -18,6 +21,8 @@ namespace StaffManager
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
             Application.Run(new Main());
+
         }
+        public static FileHelper<List<Employee>> FileHelper { get; } = new FileHelper<List<Employee>>(StaffDiaryPath);
     }
 }

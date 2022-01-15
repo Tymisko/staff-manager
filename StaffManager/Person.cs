@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace StaffManager
 {
-    internal abstract class Person
+    public abstract class Person
     {
         protected Person(string firstName, string lastName, DateTime birthDate)
         {

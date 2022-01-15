@@ -7,15 +7,15 @@ namespace StaffManager
 {
     public partial class Main : Form
     {
-        private readonly FileHelper<List<Employee>> _fileHelper;
+        public static List<Employee> Employees { get; set; } = System.IO.File.Exists(Program.StaffDiaryPath) ? 
+            Program.FileHelper.DeserializeFromJson() : new List<Employee>();
         public Main()
-        {
-            _fileHelper = new FileHelper<List<Employee>>(Program.StaffDiaryPath);
+        { 
             InitializeComponent();
             LoadStaff();
             SetColumnsHeaders();
         }
-        private void LoadStaff() => dgvDiary.DataSource = _fileHelper.DeserializeFromJson();
+        private void LoadStaff() => dgvDiary.DataSource = Employees;
 
         private void SetColumnsHeaders()
         {
@@ -53,9 +53,8 @@ namespace StaffManager
         {
             try
             {
-                var employees = _fileHelper.DeserializeFromJson();
-                employees.First(e => e.Id == GetSelectedEmployeeId()).DismissalDate = DateTime.Now.Date;
-                _fileHelper.SerializeToJson(employees);
+                Employees.First(e => e.Id == GetSelectedEmployeeId()).DismissalDate = DateTime.Now.Date;
+                Program.FileHelper.SerializeToJson(Employees);
                 LoadStaff();
             }
             catch (Exception ex)
@@ -71,9 +70,9 @@ namespace StaffManager
 
         private int GetSelectedEmployeeId()
         {
-            if (dgvDiary.SelectedRows.Count != 0)
-                return Convert.ToInt32(dgvDiary.SelectedRows[0].Cells[nameof(Employee.Id)].Value);
-            throw new Exception("No employee were selected.");
+            if (dgvDiary.SelectedRows.Count == 0)
+                throw new Exception("No employee were selected.");
+            return Convert.ToInt32(dgvDiary.SelectedRows[0].Cells[nameof(Employee.Id)].Value);
         }
     }
 }

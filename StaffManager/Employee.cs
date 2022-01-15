@@ -2,7 +2,7 @@
 
 namespace StaffManager
 { 
-    internal class Employee : Person
+    public class Employee : Person
     {
         public Employee
             (
