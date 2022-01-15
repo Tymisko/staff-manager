@@ -30,7 +30,7 @@ namespace StaffManager
             }
             set
             {
-                if (_dismissalDate is null)
+                if (_dismissalDate is not null)
                     throw new Exception("Employee already dissmissed.");
                 _dismissalDate = value;
             }

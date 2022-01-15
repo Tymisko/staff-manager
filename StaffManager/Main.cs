@@ -15,9 +15,15 @@ namespace StaffManager
             LoadStaff();
             SetColumnsHeaders();
         }
-        private void LoadStaff() => dgvDiary.DataSource = Employees;
+        private void LoadStaff()
+        {
+            if (dgvDiary.DataSource == Employees)
+                dgvDiary.Refresh();
+            else
+                dgvDiary.DataSource = Employees;
+        }
 
-        private void SetColumnsHeaders()
+    private void SetColumnsHeaders()
         {
             dgvDiary.Columns[nameof(Employee.Id)].HeaderText = "Id";
             dgvDiary.Columns[nameof(Employee.FirstName)].HeaderText = "First Name";
