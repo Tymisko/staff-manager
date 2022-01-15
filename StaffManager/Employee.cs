@@ -31,7 +31,7 @@ namespace StaffManager
             set
             {
                 if (_dismissalDate is not null)
-                    throw new Exception("Employee already dissmissed.");
+                    throw new Exception($"The employee with id {Id} has already been fired");
                 _dismissalDate = value;
             }
         }

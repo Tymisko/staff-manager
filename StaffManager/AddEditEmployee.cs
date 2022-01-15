@@ -34,7 +34,7 @@ namespace StaffManager
 
         private void LoadEmployeeData(int id)
         {
-            var selectedEmployee = Main.Employees.FirstOrDefault(e => e.Id == id) as Employee;
+            Employee selectedEmployee = Main.Employees.First(e => e.Id == id);
 
             tbId.Text = selectedEmployee!.Id.ToString();
             tbFirstName.Text = selectedEmployee.FirstName;
@@ -47,38 +47,38 @@ namespace StaffManager
 
         private void BtnAccept_Click(object sender, EventArgs e)
         {
-            try
+            if (!AreBoxesFilled(out string errorMessage))
             {
-                CheckIfBoxesAreFilled();
-
-                if (_editingEmployee)
-                    Main.Employees.RemoveAll(e => e.Id == Convert.ToInt32(tbId.Text));
-
-                Main.Employees.Add(GetEmployeeData());
-
-                Program.FileHelper.SerializeToJson(Main.Employees);
-                this.Close();
-            }
-            catch (Exception exception)
-            {
-                MessageBox.Show(exception.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(errorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
-            }            
+            }
+                
+
+            if (_editingEmployee)
+                Main.Employees.RemoveAll(e => e.Id == Convert.ToInt32(tbId.Text));
+
+            Main.Employees.Add(GetEmployeeData());
+
+            Program.FileHelper.SerializeToJson(Main.Employees);
+            this.Close();         
         }
 
-        private void CheckIfBoxesAreFilled()
+        private bool AreBoxesFilled(out string errorMessage)
         {
-            if (String.IsNullOrEmpty(tbId.Text)) throw new Exception("Id wasn't assigned.");
-            if (String.IsNullOrEmpty(tbFirstName.Text)) throw new Exception("First name wasn't assigned");
-            if (String.IsNullOrEmpty(tbLastName.Text)) throw new Exception("Last name wasn't assigned.");
-            if (dtpBirthDate.Value >= DateTime.Now.Date) throw new Exception("Invalid birth date!");
-            if (dtpEmploymentDate.Value > DateTime.Now.Date) throw new Exception("Invalid employment date!");
-            //if (nupSalary.Value < 0) throw new Exception("Salary cannot be negative"); // unnecessary, NumericUpDown minimum set to 0
+            errorMessage = string.Empty;
+
+            if (String.IsNullOrEmpty(tbId.Text)) errorMessage = "Id wasn't assigned.";
+            if (String.IsNullOrEmpty(tbFirstName.Text)) errorMessage = "First name wasn't assigned";
+            if (String.IsNullOrEmpty(tbLastName.Text)) errorMessage = "Last name wasn't assigned.";
+            if (dtpBirthDate.Value >= DateTime.Now.Date) errorMessage = "Invalid birth date!";
+            if (dtpEmploymentDate.Value > DateTime.Now.Date) errorMessage = "Invalid employment date!";
+
+            return String.IsNullOrEmpty(errorMessage);
         }
 
         private int SetNewEmployeeId()
         {
-            var lastAddedEmployee = Main.Employees.OrderByDescending(e => e.Id).FirstOrDefault();
+            Employee lastAddedEmployee = Main.Employees.OrderByDescending(e => e.Id).FirstOrDefault();
             
             if (lastAddedEmployee is null)
                 return 1;
@@ -98,5 +98,7 @@ namespace StaffManager
                 rtbComments.Text
                 );
         }
+
+        private void btnCancel_Click(object sender, EventArgs e) => this.Close();
     }
 }

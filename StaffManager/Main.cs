@@ -7,10 +7,11 @@ namespace StaffManager
 {
     public partial class Main : Form
     {
-        public static List<Employee> Employees { get; set; } = System.IO.File.Exists(Program.StaffDiaryPath) ? 
+        public static List<Employee> Employees { get; set; } = System.IO.File.Exists(Program.StaffDiaryPath) ?
             Program.FileHelper.DeserializeFromJson() : new List<Employee>();
+
         public Main()
-        { 
+        {
             InitializeComponent();
             LoadStaff();
             SetColumnsHeaders();
@@ -23,7 +24,7 @@ namespace StaffManager
                 dgvDiary.DataSource = Employees;
         }
 
-    private void SetColumnsHeaders()
+        private void SetColumnsHeaders()
         {
             dgvDiary.Columns[nameof(Employee.Id)].HeaderText = "Id";
             dgvDiary.Columns[nameof(Employee.FirstName)].HeaderText = "First Name";
@@ -40,33 +41,33 @@ namespace StaffManager
             var addEditEmployee = new AddEditEmployee();
             addEditEmployee.FormClosed += AddEditEmployee_FormClosed;
             addEditEmployee.ShowDialog();
-        }        
+        }
 
         private void BtnEdit_Click(object sender, EventArgs e)
         {
-            try
-            {
-                var addEditEmployee = new AddEditEmployee(GetSelectedEmployeeId());
-                addEditEmployee.FormClosed += AddEditEmployee_FormClosed;
-                addEditEmployee.ShowDialog();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }            
+            if (!TryGetSelectedEmployeeId(out int selectedEmployeeId))
+                MessageBox.Show("You have to select an employee to edit", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            var addEditEmployee = new AddEditEmployee(selectedEmployeeId);
+            addEditEmployee.FormClosed += AddEditEmployee_FormClosed;
+            addEditEmployee.ShowDialog();
         }
         private void BtnDismiss_Click(object sender, EventArgs e)
         {
-            try
+            if (!TryGetSelectedEmployeeId(out int selectedEmployeeId))
+                MessageBox.Show("You have to select an employee to dismiss", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            Employee selectedEmployee = Employees.First(e => e.Id == selectedEmployeeId);
+
+            if (selectedEmployee.DismissalDate is not null)
             {
-                Employees.First(e => e.Id == GetSelectedEmployeeId()).DismissalDate = DateTime.Now.Date;
-                Program.FileHelper.SerializeToJson(Employees);
-                LoadStaff();
+                MessageBox.Show($"The employee with id {selectedEmployee.Id} has already been fired", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            selectedEmployee.DismissalDate = DateTime.Now.Date;
+
+            Program.FileHelper.SerializeToJson(Employees);
+            LoadStaff();
         }
 
         private void AddEditEmployee_FormClosed(object? sender, FormClosedEventArgs e)
@@ -74,11 +75,15 @@ namespace StaffManager
             LoadStaff();
         }
 
-        private int GetSelectedEmployeeId()
+        private bool TryGetSelectedEmployeeId(out int employeId)
         {
             if (dgvDiary.SelectedRows.Count == 0)
-                throw new Exception("No employee were selected.");
-            return Convert.ToInt32(dgvDiary.SelectedRows[0].Cells[nameof(Employee.Id)].Value);
+            {
+                employeId = 0;
+                return false;
+            }
+            employeId = Convert.ToInt32(dgvDiary.SelectedRows[0].Cells[nameof(Employee.Id)].Value);
+            return true;
         }
     }
 }
