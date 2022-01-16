@@ -77,7 +77,10 @@ namespace StaffManager
         private void BtnEdit_Click(object sender, EventArgs e)
         {
             if (!TryGetSelectedEmployeeId(out int selectedEmployeeId))
+            {
                 MessageBox.Show("You have to select an employee to edit", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
             var addEditEmployee = new AddEditEmployee(selectedEmployeeId);
             addEditEmployee.FormClosed += AddEditEmployee_FormClosed;
@@ -86,7 +89,10 @@ namespace StaffManager
         private void BtnDismiss_Click(object sender, EventArgs e)
         {
             if (!TryGetSelectedEmployeeId(out int selectedEmployeeId))
+            {
                 MessageBox.Show("You have to select an employee to dismiss", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
             Employee selectedEmployee = Employees.First(e => e.Id == selectedEmployeeId);
 
