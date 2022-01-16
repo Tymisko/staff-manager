@@ -51,8 +51,7 @@ namespace StaffManager
             {
                 MessageBox.Show(errorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
-            }
-                
+            }                
 
             if (_editingEmployee)
                 Main.Employees.RemoveAll(e => e.Id == Convert.ToInt32(tbId.Text));
@@ -76,7 +75,7 @@ namespace StaffManager
             return String.IsNullOrEmpty(errorMessage);
         }
 
-        private int SetNewEmployeeId()
+        private static int SetNewEmployeeId()
         {
             Employee lastAddedEmployee = Main.Employees.OrderByDescending(e => e.Id).FirstOrDefault();
             
@@ -99,6 +98,6 @@ namespace StaffManager
                 );
         }
 
-        private void btnCancel_Click(object sender, EventArgs e) => this.Close();
+        private void BtnCancel_Click(object sender, EventArgs e) => this.Close();
     }
 }

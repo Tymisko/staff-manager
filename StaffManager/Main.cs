@@ -13,9 +13,28 @@ namespace StaffManager
         public Main()
         {
             InitializeComponent();
+            InitFiltersCombobox();
+
             LoadStaff();
-            SetColumnsHeaders();
+            InitColumnsHeaders();
+            SetProperColumnsOrder();
+
+            cmbEmploymentFilters.SelectedIndexChanged += CmbEmploymentFilters_SelectedIndexChanged;
         }
+
+        private void CmbEmploymentFilters_SelectedIndexChanged(object? sender, EventArgs e)
+        {
+            Filter selectedFilter = cmbEmploymentFilters.SelectedItem as Filter;
+            dgvDiary.DataSource = selectedFilter!.ApplyFilter(Employees);
+        }
+
+        private void InitFiltersCombobox()
+        {
+            cmbEmploymentFilters.DataSource = FilterHelper.GetFilters();
+            cmbEmploymentFilters.ValueMember = "Name";
+            cmbEmploymentFilters.DisplayMember = "Name";
+        }
+
         private void LoadStaff()
         {
             if (dgvDiary.DataSource == Employees)
@@ -24,7 +43,19 @@ namespace StaffManager
                 dgvDiary.DataSource = Employees;
         }
 
-        private void SetColumnsHeaders()
+        private void SetProperColumnsOrder()
+        {
+            dgvDiary.Columns[nameof(Employee.Id)].DisplayIndex = 0;
+            dgvDiary.Columns[nameof(Employee.FirstName)].DisplayIndex = 1;
+            dgvDiary.Columns[nameof(Employee.LastName)].DisplayIndex = 2;
+            dgvDiary.Columns[nameof(Employee.BirthDate)].DisplayIndex = 3;
+            dgvDiary.Columns[nameof(Employee.Salary)].DisplayIndex = 4;
+            dgvDiary.Columns[nameof(Employee.Comments)].DisplayIndex = 5;
+            dgvDiary.Columns[nameof(Employee.EmploymentDate)].DisplayIndex = 6;
+            dgvDiary.Columns[nameof(Employee.DismissalDate)].DisplayIndex = 7;
+        }
+
+        private void InitColumnsHeaders()
         {
             dgvDiary.Columns[nameof(Employee.Id)].HeaderText = "Id";
             dgvDiary.Columns[nameof(Employee.FirstName)].HeaderText = "First Name";
