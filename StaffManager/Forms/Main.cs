@@ -38,7 +38,10 @@ namespace StaffManager
         private void LoadStaff()
         {
             if (dgvDiary.DataSource == Employees)
-                dgvDiary.Refresh();
+            {
+                dgvDiary.DataSource = typeof(List<Employee>);
+                dgvDiary.DataSource = Employees;
+            }
             else
                 dgvDiary.DataSource = Employees;
         }
