@@ -125,6 +125,7 @@ namespace StaffManager
             this.MinimumSize = new System.Drawing.Size(1024, 860);
             this.Name = "Main";
             this.Text = "Staff Manager";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Main_FormClosed);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDiary)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

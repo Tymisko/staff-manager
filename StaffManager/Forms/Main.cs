@@ -1,4 +1,5 @@
 using StaffManager.Helpers;
+using StaffManager.Properties;
 using System;
 using System.ComponentModel;
 using System.Linq;
@@ -11,6 +12,18 @@ namespace StaffManager
         public static BindingList<Employee> Employees { get; set; } = System.IO.File.Exists(Program.StaffDiaryPath) ?
             Program.FileHelper.DeserializeFromJson() : new BindingList<Employee>();
 
+        public static bool IsMaximize
+        {
+            get
+            {
+                return Settings.Default.IsMaximize;
+            }
+            set
+            {
+                Settings.Default.IsMaximize = value;
+            }
+        }
+
         public Main()
         {
             InitializeComponent();
@@ -19,6 +32,14 @@ namespace StaffManager
             LoadStaff();
             InitColumnsHeaders();
             SetProperColumnsOrder();
+
+            LoadUserSettings();            
+        }
+
+        private void LoadUserSettings()
+        {
+            if(IsMaximize) 
+                WindowState = FormWindowState.Maximized;
         }
 
         private void CmbEmploymentFilters_SelectedIndexChanged(object? sender, EventArgs e)
@@ -123,6 +144,12 @@ namespace StaffManager
             }
             employeId = Convert.ToInt32(dgvDiary.SelectedRows[0].Cells[nameof(Employee.Id)].Value);
             return true;
+        }
+
+        private void Main_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            IsMaximize = (WindowState == FormWindowState.Maximized);
+            Settings.Default.Save();
         }
     }
 }
