@@ -71,7 +71,10 @@ namespace StaffManager
             // 
             // dgvDiary
             // 
+            this.dgvDiary.AllowUserToAddRows = false;
             this.dgvDiary.AllowUserToDeleteRows = false;
+            this.dgvDiary.AllowUserToResizeColumns = false;
+            this.dgvDiary.AllowUserToResizeRows = false;
             this.dgvDiary.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -79,7 +82,10 @@ namespace StaffManager
             this.dgvDiary.BackgroundColor = System.Drawing.Color.WhiteSmoke;
             this.dgvDiary.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDiary.Location = new System.Drawing.Point(12, 40);
+            this.dgvDiary.MultiSelect = false;
             this.dgvDiary.Name = "dgvDiary";
+            this.dgvDiary.ReadOnly = true;
+            this.dgvDiary.RowHeadersVisible = false;
             this.dgvDiary.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dgvDiary.RowTemplate.Height = 25;
             this.dgvDiary.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
