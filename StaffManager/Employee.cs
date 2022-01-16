@@ -17,10 +17,10 @@ namespace StaffManager
             ) : base(firstName, lastName, birthDate)
         {
             Id = id;
+            _age = CalculateEmployeeAge();
             EmploymentDate = (IsOldEnoughToBeEmployed()) ? employmentDate : throw new Exception("This person is too young to be employed."); 
             Salary = Math.Round(salary, 2);
             Comments = comments;
-            _age = CalculateEmployeeAge();
         }
 
         public int Id { get; }
