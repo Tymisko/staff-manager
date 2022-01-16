@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace StaffManager
+namespace StaffManager.Helpers
 {
     internal static class FilterHelper
     {
@@ -18,14 +18,14 @@ namespace StaffManager
 
         private static List<Employee> EmployeedFilter(in List<Employee> employees)
         {
-            List<Employee> filteredEmployeesList = new List<Employee>(employees);
+            List<Employee> filteredEmployeesList = new(employees);
             filteredEmployeesList.RemoveAll(e => e.DismissalDate is not null);
             return filteredEmployeesList;
         }
 
         private static List<Employee> DismissedFilter(in List<Employee> employees)
         {
-            List<Employee> filteredEmployeesList = new List<Employee>(employees);
+            List<Employee> filteredEmployeesList = new(employees);
             filteredEmployeesList.RemoveAll(e => e.DismissalDate is null);
             return filteredEmployeesList;
         }

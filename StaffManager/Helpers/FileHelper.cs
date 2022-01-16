@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System.IO;
 
-namespace StaffManager
+namespace StaffManager.Helpers
 {
     public class FileHelper<T> where T : new()
     {

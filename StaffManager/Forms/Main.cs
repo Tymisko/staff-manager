@@ -1,3 +1,4 @@
+using StaffManager.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,8 +19,6 @@ namespace StaffManager
             LoadStaff();
             InitColumnsHeaders();
             SetProperColumnsOrder();
-
-            cmbEmploymentFilters.SelectedIndexChanged += CmbEmploymentFilters_SelectedIndexChanged;
         }
 
         private void CmbEmploymentFilters_SelectedIndexChanged(object? sender, EventArgs e)
@@ -33,6 +32,7 @@ namespace StaffManager
             cmbEmploymentFilters.DataSource = FilterHelper.GetFilters();
             cmbEmploymentFilters.ValueMember = "Name";
             cmbEmploymentFilters.DisplayMember = "Name";
+            cmbEmploymentFilters.SelectedIndexChanged += CmbEmploymentFilters_SelectedIndexChanged;
         }
 
         private void LoadStaff()
