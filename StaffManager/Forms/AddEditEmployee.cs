@@ -66,13 +66,13 @@ namespace StaffManager
         {
             errorMessage = string.Empty;
 
-            if (String.IsNullOrEmpty(tbId.Text)) errorMessage = "Id wasn't assigned.";
-            if (String.IsNullOrEmpty(tbFirstName.Text)) errorMessage = "First name wasn't assigned";
-            if (String.IsNullOrEmpty(tbLastName.Text)) errorMessage = "Last name wasn't assigned.";
+            if (string.IsNullOrEmpty(tbId.Text)) errorMessage = "Id wasn't assigned.";
+            if (string.IsNullOrEmpty(tbFirstName.Text)) errorMessage = "First name wasn't assigned";
+            if (string.IsNullOrEmpty(tbLastName.Text)) errorMessage = "Last name wasn't assigned.";
             if (dtpBirthDate.Value >= DateTime.Now.Date) errorMessage = "Invalid birth date!";
             if (dtpEmploymentDate.Value > DateTime.Now.Date) errorMessage = "Invalid employment date!";
 
-            return String.IsNullOrEmpty(errorMessage);
+            return string.IsNullOrEmpty(errorMessage);
         }
 
         private static int SetNewEmployeeId()
