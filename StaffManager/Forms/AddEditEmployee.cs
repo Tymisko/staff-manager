@@ -47,19 +47,25 @@ namespace StaffManager
 
         private void BtnAccept_Click(object sender, EventArgs e)
         {
-            if (!AreBoxesFilled(out string errorMessage))
+            try
             {
-                MessageBox.Show(errorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (!AreBoxesFilled(out string errorMessage))
+                    throw new Exception(errorMessage);
+
+                if (_editingEmployee)
+                    Main.Employees.Remove(Main.Employees.First(e => e.Id == Convert.ToInt32(tbId.Text)));
+
+                Main.Employees.Add(GetEmployeeData());
+
+                Program.FileHelper.SerializeToJson(Main.Employees);
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
-            }                
-
-            if (_editingEmployee)
-                Main.Employees.Remove(Main.Employees.First(e => e.Id == Convert.ToInt32(tbId.Text)));
-
-            Main.Employees.Add(GetEmployeeData());
-
-            Program.FileHelper.SerializeToJson(Main.Employees);
-            this.Close();         
+            }
+                  
         }
 
         private bool AreBoxesFilled(out string errorMessage)
@@ -70,7 +76,7 @@ namespace StaffManager
             if (string.IsNullOrEmpty(tbFirstName.Text)) errorMessage = "First name wasn't assigned";
             if (string.IsNullOrEmpty(tbLastName.Text)) errorMessage = "Last name wasn't assigned.";
             if (dtpBirthDate.Value >= DateTime.Now.Date) errorMessage = "Invalid birth date!";
-            if (dtpEmploymentDate.Value > DateTime.Now.Date) errorMessage = "Invalid employment date!";
+            if (dtpEmploymentDate.Value.Date > DateTime.Now.Date) errorMessage = "Invalid employment date!";
 
             return string.IsNullOrEmpty(errorMessage);
         }

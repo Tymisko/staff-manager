@@ -4,6 +4,7 @@ namespace StaffManager
 { 
     public class Employee : Person
     {
+        private const int _minimumEmployeeAge = 16;
         public Employee
             (
                 int id, 
@@ -16,9 +17,10 @@ namespace StaffManager
             ) : base(firstName, lastName, birthDate)
         {
             Id = id;
-            EmploymentDate = employmentDate;
+            EmploymentDate = (IsOldEnoughToBeEmployed()) ? employmentDate : throw new Exception("This person is too young to be employed."); 
             Salary = Math.Round(salary, 2);
             Comments = comments;
+            _age = CalculateEmployeeAge();
         }
 
         public int Id { get; }
@@ -35,9 +37,24 @@ namespace StaffManager
                 _dismissalDate = value;
             }
         }
+
+        private readonly int _age;
+        public int Age
+        {
+            get
+            {
+                return _age;
+            }
+        }
+
         public string Comments { get; }
         public decimal Salary { get; }
 
         private DateTime? _dismissalDate;
+
+
+        private bool IsOldEnoughToBeEmployed() => _age >= _minimumEmployeeAge;
+
+        private int CalculateEmployeeAge() => DateTime.Now.Year - BirthDate.Year - (DateTime.Now.DayOfYear > BirthDate.DayOfYear ? 0 : 1);
     }
 }
