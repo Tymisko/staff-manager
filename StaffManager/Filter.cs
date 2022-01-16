@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System.ComponentModel;
 
 namespace StaffManager
 {
     internal class Filter
     {
-        public delegate List<Employee> FilterConditionHandler(in List<Employee> employees);
+        public delegate BindingList<Employee> FilterConditionHandler(in BindingList<Employee> employees);
 
         private readonly string _name;
         private readonly FilterConditionHandler _filterCondition;
@@ -17,7 +17,7 @@ namespace StaffManager
 
         public string Name => _name; 
 
-        public List<Employee> ApplyFilter(List<Employee> employeeList)
+        public BindingList<Employee> ApplyFilter(BindingList<Employee> employeeList)
         {
             return _filterCondition(employeeList);
         }

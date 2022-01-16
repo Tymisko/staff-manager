@@ -1,12 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System.ComponentModel;
+using System.Linq;
 
 namespace StaffManager.Helpers
 {
     internal static class FilterHelper
     {
-        public static List<Filter> GetFilters()
+        public static BindingList<Filter> GetFilters()
         {
-            return new List<Filter>
+            return new BindingList<Filter>
             {
                 new Filter("All", AllFilter),
                 new Filter("Employeed", EmployeedFilter),
@@ -14,20 +15,18 @@ namespace StaffManager.Helpers
             };
         }
 
-        private static List<Employee> AllFilter(in List<Employee> employees) => employees;
+        private static BindingList<Employee> AllFilter(in BindingList<Employee> employees) => employees;
 
-        private static List<Employee> EmployeedFilter(in List<Employee> employees)
+        private static BindingList<Employee> EmployeedFilter(in BindingList<Employee> employees)
         {
-            List<Employee> filteredEmployeesList = new(employees);
-            filteredEmployeesList.RemoveAll(e => e.DismissalDate is not null);
-            return filteredEmployeesList;
+            var filteredEmployeesList = employees.Where(e => e.DismissalDate is null).ToList();
+            return new BindingList<Employee>(filteredEmployeesList);
         }
 
-        private static List<Employee> DismissedFilter(in List<Employee> employees)
+        private static BindingList<Employee> DismissedFilter(in BindingList<Employee> employees)
         {
-            List<Employee> filteredEmployeesList = new(employees);
-            filteredEmployeesList.RemoveAll(e => e.DismissalDate is null);
-            return filteredEmployeesList;
+            var filteredEmployeesList = employees.Where(e => e.DismissalDate is not null).ToList();
+            return new BindingList<Employee>(filteredEmployeesList);
         }
     }
 }

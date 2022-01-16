@@ -1,6 +1,7 @@
 using StaffManager.Helpers;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Windows.Forms;
 
@@ -24,6 +25,6 @@ namespace StaffManager
             Application.Run(new Main());
 
         }
-        public static FileHelper<List<Employee>> FileHelper { get; } = new FileHelper<List<Employee>>(StaffDiaryPath);
+        public static FileHelper<BindingList<Employee>> FileHelper { get; } = new FileHelper<BindingList<Employee>>(StaffDiaryPath);
     }
 }

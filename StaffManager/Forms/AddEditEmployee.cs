@@ -54,7 +54,7 @@ namespace StaffManager
             }                
 
             if (_editingEmployee)
-                Main.Employees.RemoveAll(e => e.Id == Convert.ToInt32(tbId.Text));
+                Main.Employees.Remove(Main.Employees.First(e => e.Id == Convert.ToInt32(tbId.Text)));
 
             Main.Employees.Add(GetEmployeeData());
 

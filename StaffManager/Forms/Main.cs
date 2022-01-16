@@ -1,6 +1,6 @@
 using StaffManager.Helpers;
 using System;
-using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -8,8 +8,8 @@ namespace StaffManager
 {
     public partial class Main : Form
     {
-        public static List<Employee> Employees { get; set; } = System.IO.File.Exists(Program.StaffDiaryPath) ?
-            Program.FileHelper.DeserializeFromJson() : new List<Employee>();
+        public static BindingList<Employee> Employees { get; set; } = System.IO.File.Exists(Program.StaffDiaryPath) ?
+            Program.FileHelper.DeserializeFromJson() : new BindingList<Employee>();
 
         public Main()
         {
@@ -39,8 +39,7 @@ namespace StaffManager
         {
             if (dgvDiary.DataSource == Employees)
             {
-                dgvDiary.DataSource = typeof(List<Employee>);
-                dgvDiary.DataSource = Employees;
+                dgvDiary.Refresh();
             }
             else
                 dgvDiary.DataSource = Employees;
