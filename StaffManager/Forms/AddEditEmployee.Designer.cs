@@ -216,6 +216,7 @@
             this.MaximumSize = new System.Drawing.Size(399, 359);
             this.MinimumSize = new System.Drawing.Size(399, 359);
             this.Name = "AddEditEmployee";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "AddEditEmployee";
             ((System.ComponentModel.ISupportInitialize)(this.nupSalary)).EndInit();
             this.ResumeLayout(false);
