@@ -4,6 +4,11 @@
 1. Extract from .zip
 1. Run _StaffManager.exe_
 
+# Features that will be avaiable soon:
+- Additional fields of number and e-mail of staff member
+- posibility to add new employee position
+- select position for employee
+
 # Application Presentation
 
 ## Main window
