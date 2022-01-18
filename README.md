@@ -7,7 +7,7 @@
 # Features that will be avaiable soon:
 - Additional fields of number and e-mail of staff member
 - posibility to add new employee position
-- select position for employee
+- selection of position for employee
 
 # Application Presentation
 
