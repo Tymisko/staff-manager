@@ -5,9 +5,10 @@
 1. Run _StaffManager.exe_
 
 # Features that will be avaiable soon:
-- Additional fields of number and e-mail of staff member
-- posibility to add new employee position
-- selection of position for employee
+
+- [x] Additional fields of number and e-mail of staff member
+- [ ] posibility to add new employee position
+- [ ] position selection for employee
 
 # Application Presentation
 
