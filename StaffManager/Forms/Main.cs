@@ -33,7 +33,14 @@ namespace StaffManager
             InitColumnsHeaders();
             SetProperColumnsOrder();
 
-            LoadUserSettings();            
+            LoadUserSettings();
+
+            HideColumns();
+        }
+
+        private void HideColumns()
+        {
+            dgvDiary.Columns[nameof(Employee.Age)].Visible = false;
         }
 
         private void LoadUserSettings()
@@ -72,10 +79,12 @@ namespace StaffManager
             dgvDiary.Columns[nameof(Employee.FirstName)].DisplayIndex = 1;
             dgvDiary.Columns[nameof(Employee.LastName)].DisplayIndex = 2;
             dgvDiary.Columns[nameof(Employee.BirthDate)].DisplayIndex = 3;
-            dgvDiary.Columns[nameof(Employee.Salary)].DisplayIndex = 4;
-            dgvDiary.Columns[nameof(Employee.Comments)].DisplayIndex = 5;
-            dgvDiary.Columns[nameof(Employee.EmploymentDate)].DisplayIndex = 6;
-            dgvDiary.Columns[nameof(Employee.DismissalDate)].DisplayIndex = 7;
+            dgvDiary.Columns[nameof(Employee.Email)].DisplayIndex = 4;
+            dgvDiary.Columns[nameof(Employee.PhoneNumber)].DisplayIndex = 5;
+            dgvDiary.Columns[nameof(Employee.Salary)].DisplayIndex = 6;
+            dgvDiary.Columns[nameof(Employee.Comments)].DisplayIndex = 7;
+            dgvDiary.Columns[nameof(Employee.EmploymentDate)].DisplayIndex = 8;
+            dgvDiary.Columns[nameof(Employee.DismissalDate)].DisplayIndex = 9;
         }
 
         private void InitColumnsHeaders()
@@ -84,6 +93,8 @@ namespace StaffManager
             dgvDiary.Columns[nameof(Employee.FirstName)].HeaderText = "First Name";
             dgvDiary.Columns[nameof(Employee.LastName)].HeaderText = "Last Name";
             dgvDiary.Columns[nameof(Employee.BirthDate)].HeaderText = "Birth date";
+            dgvDiary.Columns[nameof(Employee.Email)].HeaderText = "Email";
+            dgvDiary.Columns[nameof(Employee.PhoneNumber)].HeaderText = "Phone number";
             dgvDiary.Columns[nameof(Employee.Salary)].HeaderText = "Salary";
             dgvDiary.Columns[nameof(Employee.Comments)].HeaderText = "Comments";
             dgvDiary.Columns[nameof(Employee.EmploymentDate)].HeaderText = "Employment Date";

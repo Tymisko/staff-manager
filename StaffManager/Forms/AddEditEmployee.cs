@@ -40,6 +40,8 @@ namespace StaffManager
             tbFirstName.Text = selectedEmployee.FirstName;
             tbLastName.Text = selectedEmployee.LastName;
             dtpBirthDate.Value = selectedEmployee.BirthDate.Date;
+            tbEmail.Text = selectedEmployee.Email;
+            tbPhoneNumber.Text = selectedEmployee.PhoneNumber;
             dtpEmploymentDate.Value = selectedEmployee.EmploymentDate.Date;
             nupSalary.Value = selectedEmployee.Salary;
             rtbComments.Text = selectedEmployee.Comments;
@@ -64,8 +66,7 @@ namespace StaffManager
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
-            }
-                  
+            }                  
         }
 
         private bool AreBoxesFilled(out string errorMessage)
@@ -98,6 +99,8 @@ namespace StaffManager
                 tbFirstName.Text,
                 tbLastName.Text,
                 dtpBirthDate.Value.Date,
+                tbEmail.Text,
+                tbPhoneNumber.Text,
                 dtpEmploymentDate.Value.Date,
                 nupSalary.Value,
                 rtbComments.Text

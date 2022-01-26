@@ -44,6 +44,10 @@
             this.rtbComments = new System.Windows.Forms.RichTextBox();
             this.btnAccept = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
+            this.tbEmail = new System.Windows.Forms.TextBox();
+            this.lbEmail = new System.Windows.Forms.Label();
+            this.lbPhoneNumber = new System.Windows.Forms.Label();
+            this.tbPhoneNumber = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.nupSalary)).BeginInit();
             this.SuspendLayout();
             // 
@@ -69,7 +73,7 @@
             this.tbId.Name = "tbId";
             this.tbId.ReadOnly = true;
             this.tbId.Size = new System.Drawing.Size(248, 23);
-            this.tbId.TabIndex = 3;
+            this.tbId.TabIndex = 12;
             // 
             // lbId
             // 
@@ -85,7 +89,7 @@
             this.tbLastName.Location = new System.Drawing.Point(119, 68);
             this.tbLastName.Name = "tbLastName";
             this.tbLastName.Size = new System.Drawing.Size(248, 23);
-            this.tbLastName.TabIndex = 5;
+            this.tbLastName.TabIndex = 2;
             this.tbLastName.Text = " ";
             // 
             // lbLastName
@@ -111,12 +115,12 @@
             this.dtpBirthDate.Location = new System.Drawing.Point(119, 99);
             this.dtpBirthDate.Name = "dtpBirthDate";
             this.dtpBirthDate.Size = new System.Drawing.Size(248, 23);
-            this.dtpBirthDate.TabIndex = 7;
+            this.dtpBirthDate.TabIndex = 3;
             // 
             // lbEmploymentDate
             // 
             this.lbEmploymentDate.AutoSize = true;
-            this.lbEmploymentDate.Location = new System.Drawing.Point(12, 131);
+            this.lbEmploymentDate.Location = new System.Drawing.Point(12, 193);
             this.lbEmploymentDate.Name = "lbEmploymentDate";
             this.lbEmploymentDate.Size = new System.Drawing.Size(101, 15);
             this.lbEmploymentDate.TabIndex = 8;
@@ -124,15 +128,15 @@
             // 
             // dtpEmploymentDate
             // 
-            this.dtpEmploymentDate.Location = new System.Drawing.Point(119, 128);
+            this.dtpEmploymentDate.Location = new System.Drawing.Point(119, 190);
             this.dtpEmploymentDate.Name = "dtpEmploymentDate";
             this.dtpEmploymentDate.Size = new System.Drawing.Size(248, 23);
-            this.dtpEmploymentDate.TabIndex = 9;
+            this.dtpEmploymentDate.TabIndex = 6;
             // 
             // lbSalary
             // 
             this.lbSalary.AutoSize = true;
-            this.lbSalary.Location = new System.Drawing.Point(13, 159);
+            this.lbSalary.Location = new System.Drawing.Point(13, 221);
             this.lbSalary.Name = "lbSalary";
             this.lbSalary.Size = new System.Drawing.Size(38, 15);
             this.lbSalary.TabIndex = 10;
@@ -145,7 +149,7 @@
             0,
             0,
             0});
-            this.nupSalary.Location = new System.Drawing.Point(119, 157);
+            this.nupSalary.Location = new System.Drawing.Point(119, 219);
             this.nupSalary.Maximum = new decimal(new int[] {
             50000,
             0,
@@ -153,12 +157,12 @@
             0});
             this.nupSalary.Name = "nupSalary";
             this.nupSalary.Size = new System.Drawing.Size(248, 23);
-            this.nupSalary.TabIndex = 11;
+            this.nupSalary.TabIndex = 7;
             // 
             // lbComments
             // 
             this.lbComments.AutoSize = true;
-            this.lbComments.Location = new System.Drawing.Point(13, 189);
+            this.lbComments.Location = new System.Drawing.Point(13, 251);
             this.lbComments.Name = "lbComments";
             this.lbComments.Size = new System.Drawing.Size(66, 15);
             this.lbComments.TabIndex = 12;
@@ -166,37 +170,73 @@
             // 
             // rtbComments
             // 
-            this.rtbComments.Location = new System.Drawing.Point(119, 186);
+            this.rtbComments.Location = new System.Drawing.Point(119, 248);
             this.rtbComments.Name = "rtbComments";
-            this.rtbComments.Size = new System.Drawing.Size(248, 96);
-            this.rtbComments.TabIndex = 13;
+            this.rtbComments.Size = new System.Drawing.Size(248, 116);
+            this.rtbComments.TabIndex = 8;
             this.rtbComments.Text = "";
             // 
             // btnAccept
             // 
-            this.btnAccept.Location = new System.Drawing.Point(179, 288);
+            this.btnAccept.Location = new System.Drawing.Point(179, 370);
             this.btnAccept.Name = "btnAccept";
             this.btnAccept.Size = new System.Drawing.Size(91, 23);
-            this.btnAccept.TabIndex = 14;
+            this.btnAccept.TabIndex = 9;
             this.btnAccept.Text = "Accept";
             this.btnAccept.UseVisualStyleBackColor = true;
             this.btnAccept.Click += new System.EventHandler(this.BtnAccept_Click);
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(276, 288);
+            this.btnCancel.Location = new System.Drawing.Point(276, 370);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(91, 23);
-            this.btnCancel.TabIndex = 15;
+            this.btnCancel.TabIndex = 10;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
+            // 
+            // tbEmail
+            // 
+            this.tbEmail.Location = new System.Drawing.Point(119, 132);
+            this.tbEmail.Name = "tbEmail";
+            this.tbEmail.Size = new System.Drawing.Size(248, 23);
+            this.tbEmail.TabIndex = 4;
+            // 
+            // lbEmail
+            // 
+            this.lbEmail.AutoSize = true;
+            this.lbEmail.Location = new System.Drawing.Point(12, 135);
+            this.lbEmail.Name = "lbEmail";
+            this.lbEmail.Size = new System.Drawing.Size(39, 15);
+            this.lbEmail.TabIndex = 17;
+            this.lbEmail.Text = "Email:";
+            // 
+            // lbPhoneNumber
+            // 
+            this.lbPhoneNumber.AutoSize = true;
+            this.lbPhoneNumber.Location = new System.Drawing.Point(12, 164);
+            this.lbPhoneNumber.Name = "lbPhoneNumber";
+            this.lbPhoneNumber.Size = new System.Drawing.Size(89, 15);
+            this.lbPhoneNumber.TabIndex = 19;
+            this.lbPhoneNumber.Text = "Phone number:";
+            // 
+            // tbPhoneNumber
+            // 
+            this.tbPhoneNumber.Location = new System.Drawing.Point(119, 161);
+            this.tbPhoneNumber.Name = "tbPhoneNumber";
+            this.tbPhoneNumber.Size = new System.Drawing.Size(248, 23);
+            this.tbPhoneNumber.TabIndex = 5;
             // 
             // AddEditEmployee
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(383, 320);
+            this.ClientSize = new System.Drawing.Size(383, 405);
+            this.Controls.Add(this.lbPhoneNumber);
+            this.Controls.Add(this.tbPhoneNumber);
+            this.Controls.Add(this.lbEmail);
+            this.Controls.Add(this.tbEmail);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnAccept);
             this.Controls.Add(this.rtbComments);
@@ -213,8 +253,6 @@
             this.Controls.Add(this.lbId);
             this.Controls.Add(this.tbFirstName);
             this.Controls.Add(this.lbFirstName);
-            this.MaximumSize = new System.Drawing.Size(399, 359);
-            this.MinimumSize = new System.Drawing.Size(399, 359);
             this.Name = "AddEditEmployee";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "AddEditEmployee";
@@ -242,5 +280,9 @@
         private System.Windows.Forms.RichTextBox rtbComments;
         private System.Windows.Forms.Button btnAccept;
         private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.TextBox tbEmail;
+        private System.Windows.Forms.Label lbEmail;
+        private System.Windows.Forms.Label lbPhoneNumber;
+        private System.Windows.Forms.TextBox tbPhoneNumber;
     }
 }
